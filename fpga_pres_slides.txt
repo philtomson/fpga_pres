@@ -1,0 +1,41 @@
+1.Intro
+
+2.What's an FGPA?
+  a. collection of logic blocks (pic of logic block)
+    - lookup tables, muxes and flip flops
+  b. fast routing connections between them
+  c. user configurable ('F' in FPGA)
+    -> generally not dynamically reconfigurable (except Tabula)
+  d. companies: Xilinx, Altera are the main ones (keep an eye on Tabula)
+2a. Why would you want to use an FPGA (maybe this one goes first)
+    (vs GPU acceleration)
+     - GPUs good for vector ops, but you can't make your own processor with them
+
+3. What's the process of creating an FPGA design?
+  a. describe design in HDL code (VHDL, Verilog)
+  b. simulate HDL code (GHDL, Icarus are free simulators)
+---> proprietary tools from here on:
+  b. synthesize design (ISE in Xilinx)
+  c. place and route -> bitcode
+  d. download bitcode into FPGA
+
+4. What's an HDL?
+  a. Hardware Description Language - for modeling your design
+  b. two purposes: 
+    - Simulation: simulate the hardware to be produced
+       (Verification and design exploration as well as timing)
+    - Synthesis: describe the hardware to be produced
+      (this can be very declarative: BlueSpec, Confluence)
+  c. Hardware is highly concurrent
+     (VHDL processes)
+  d. Examples: VHDL, Verilog, SystemC, BlueSpec, RHDL
+  
+??  Math: use fixed point
+
+5. Simple example:
+  a. serial bit-pattern matcher: captures the next 8 bits if pattern is matched. 
+
+
+N. Resources
+ 
+NN. Questions
