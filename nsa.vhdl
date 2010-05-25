@@ -8,7 +8,8 @@ entity NSA is
          s_in    : in std_ulogic;
          inbits  : in std_ulogic_vector(3 downto 0);
          valid   : out std_ulogic;
-         outbits : out std_ulogic_vector(3 downto 0)
+         outbits : out std_ulogic_vector(3 downto 0);
+         ready   : out std_ulogic
       );
 end entity NSA;
 
@@ -25,17 +26,25 @@ begin
 
   mcount : process(clk,rst)
   begin
-    if(clk'event and clk = '1') then
-      if( rst = '1' or match = '0'  ) then
-        counter <= 0; 
+    if(clk'event and clk = '0') then
+      if( rst = '1' or (match = '0' and check_n = '0')  ) then
+        counter <=  0; 
         acquire <= '0';
         valid   <= '0';
+        ready   <= '0';
       elsif( counter = max_count and check_n = '0') then
         valid   <= '1';
         counter <=  0;
         acquire <= '1';
+        ready   <= '0';
+      elsif( counter = max_count and acquire = '1') then
+        valid   <= '0';
+        counter <=  0;
+        acquire <= '0';
+        ready   <= '1';
       else
         valid   <= '0';
+        ready   <= '0';
         counter <= counter + 1 ;
       end if;
     end if; 
@@ -59,7 +68,7 @@ begin
   acquirer : process(clk,rst)
   begin
     if(clk'event and clk = '1') then
-      if(rst = '1') then
+      if(rst = '1' ) then
         outreg <= (others => '0');
       else
         if(acquire = '1') then
