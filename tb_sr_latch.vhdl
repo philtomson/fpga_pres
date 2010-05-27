@@ -1,8 +1,9 @@
-entity tb_sr_latch is
+--test bench for sr_latch
+entity tb_sr_latch is  --empty entity
 end entity tb_sr_latch;
 
 architecture beh of tb_sr_latch is
-  component sr_latch 
+  component sr_latch   --declare the component to test
       port(
      s_n  : in bit;
      r_n  : in bit;
@@ -15,11 +16,11 @@ architecture beh of tb_sr_latch is
   signal q   : bit;
   signal q_n : bit;
 begin
-  latch_1 : sr_latch 
+  latch_1 : sr_latch  --instantiate the component to test
             port map( s_n=>s_n, r_n=>r_n, q=>q, q_n=>q_n);
   stim: process 
   begin
-    s_n <= '1';
+    s_n <= '1'; --wiggle the inputs
     r_n <= '0';
     wait for 10 ns;
     s_n <= '0';
@@ -34,7 +35,6 @@ begin
     s_n <= '0';
     r_n <= '0';
     wait for 10 ns;
-
     wait; --wait forever
   end process stim;
 end beh;
