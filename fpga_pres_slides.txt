@@ -1,6 +1,6 @@
 1.Intro
 
-2.What's an FGPA?
+2.What's an FPGA?
   a. collection of logic blocks (pic of logic block)
     - lookup tables, muxes and flip flops
   b. fast routing connections between them
